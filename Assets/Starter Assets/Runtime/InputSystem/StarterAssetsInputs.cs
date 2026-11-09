@@ -21,6 +21,11 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		[Header("Shooting Settings")]
+		public GameObject proyectilePrefab;
+		public Transform proyectileSpawnPoint;
+		public float velocidadBalas;
+
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
@@ -45,8 +50,23 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
-#endif
 
+		public void OnShoot()
+		{
+			Debug.Log("Click detectado.");
+			RealizarDisparo();
+
+			
+		}
+#endif
+		private void RealizarDisparo()
+		{
+            Debug.Log("El disparo deberia estar ocurriendo.");
+
+			GameObject newProjectile =	Instantiate(proyectilePrefab, proyectileSpawnPoint.position + transform.forward, transform.rotation);
+
+			newProjectile.GetComponent<Rigidbody>().AddForce(proyectileSpawnPoint.up * velocidadBalas, ForceMode.Impulse);
+        }
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
