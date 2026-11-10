@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 public class ReceiveDamage : MonoBehaviour
 {
 
+    public GameObject player;
 
     public TextMeshProUGUI healthText;
     public Image healthBar;
@@ -19,7 +20,7 @@ public class ReceiveDamage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        win = GetComponent<WinCondition>();
+        win = player.GetComponent<WinCondition>();
         enemyNavigation = GetComponent<EnemyNavigation>();
 
         
@@ -51,7 +52,7 @@ public class ReceiveDamage : MonoBehaviour
             {
                 Debug.Log("Player is dead");
                 enemyNavigation.Die();
-                
+                win.AddOne();
                 Destroy(healthBar);
                 Destroy(healthText);
                 Destroy(healthBar2);

@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e43982b5a064654b891b028dcd06279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReceiveDamage
+  player: {fileID: 5757545810368913268, guid: a97afc77aff437a4aa8a364ec0999b81, type: 3}
   healthText: {fileID: 5386087717421642562}
   healthBar: {fileID: 1280206678476311531}
   healthBar2: {fileID: 3856251513065198549}
