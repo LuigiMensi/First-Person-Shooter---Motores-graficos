@@ -14,32 +14,48 @@ public class ReceiveDamage : MonoBehaviour
     public Image healthBar2;
     public int health;
     public EnemyNavigation enemyNavigation;
+    //public TextMeshProUGUI enemyText;
+    public NewWinCondition winconditioon;
+    //public GameObject winPanel;
+    //public GameObject losePanel;
 
-    public WinCondition win;
+    public int totalEnemigos = 0;
+    public int enemigosMuertos;
+
+    public GameObject Counter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        win = player.GetComponent<WinCondition>();
-        enemyNavigation = GetComponent<EnemyNavigation>();
 
-        
+        enemyNavigation = GetComponent<EnemyNavigation>();
+        totalEnemigos = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        //winPanel.SetActive(false);
+        //losePanel.SetActive(false);
+        //enemyText.text = (enemigosMuertos + "/" + totalEnemigos);
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //enemyText.text = (enemigosMuertos + "/" + totalEnemigos);
+        /*if (enemigosMuertos >= totalEnemigos)
+        {
+            Time.timeScale = 0f;
+            winPanel.SetActive(true);
+
+        }*/
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("Projectile"))
         {
             Debug.Log("Received damage from projectile!");
 
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
 
             health -= 25;
             healthText.text =  health.ToString();
@@ -52,14 +68,21 @@ public class ReceiveDamage : MonoBehaviour
             {
                 Debug.Log("Player is dead");
                 enemyNavigation.Die();
-                win.AddOne();
+                
                 Destroy(healthBar);
                 Destroy(healthText);
                 Destroy(healthBar2);
+                enemigosMuertos = enemigosMuertos + 1;
+                //Instantiate(Counter);
                 
+
+
             }
 
         }
+
+
+
     }
 
 

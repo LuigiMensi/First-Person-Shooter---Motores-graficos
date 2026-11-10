@@ -11,7 +11,7 @@ public class WinCondition : MonoBehaviour
 
     public int totalEnemigos = 0;
     public int enemigosMuertos;
-    public TextMeshProUGUI Enemytext;
+    //public TextMeshProUGUI Enemytext;
 
     void Start()
     {
@@ -19,10 +19,10 @@ public class WinCondition : MonoBehaviour
         totalEnemigos = GameObject.FindGameObjectsWithTag("Enemy").Length;
         winPanel.SetActive(false);
         losePanel.SetActive(false);
-        Enemytext.text = (enemigosMuertos + "/" + totalEnemigos);
+        //Enemytext.text = (enemigosMuertos + "/" + totalEnemigos);
     }
 
-
+    /*
 
     void Update()
     {
@@ -40,5 +40,5 @@ public class WinCondition : MonoBehaviour
         enemigosMuertos = enemigosMuertos + 1;
     }
 
-
+    */
 }

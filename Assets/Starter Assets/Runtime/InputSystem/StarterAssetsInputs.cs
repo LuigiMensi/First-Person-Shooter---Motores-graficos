@@ -1,5 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.PlayerLoop;
+
 #if ENABLE_INPUT_SYSTEM
+
 using UnityEngine.InputSystem;
 #endif
 
@@ -11,8 +15,8 @@ namespace StarterAssets
 	{
 		public GameObject winPanel;
 		public GameObject losePanel;
-
-
+		public int vida;
+		public Text texto;
 
 
 		[Header("Character Input Values")]
@@ -44,6 +48,11 @@ namespace StarterAssets
 		{
 
 
+		}
+
+		private void Update()
+		{
+			texto.text = ("Vida: " + vida);
 		}
 		public void OnMove(InputValue value)
 		{
@@ -123,23 +132,52 @@ namespace StarterAssets
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 
-
-		private void OnCollisionEnter(Collision collision)
+		private void OnTriggerEnter(Collider other)
 		{
-
-			if (collision.gameObject.CompareTag("Enemy"))
+			if (other.CompareTag("Item"))
 			{
-				Destroy(collision.gameObject);
-
-
-				losePanel.SetActive(true);
-
+				Destroy(other.gameObject);
+				winPanel.SetActive(true);
+				Time.timeScale = 0f;
 
 			}
+			if (other.CompareTag("Enemy"))
+			{
+
+				vida = vida - 25; 
+
+				if (vida <= 0)
+				{
+					Destroy(other.gameObject);
+					losePanel.SetActive(true);
+					Time.timeScale = 0f;
+				}
+                
+
+            }
+            /*private void OnCollisionEnter(Collision collision)
+            {
+
+                if (collision.gameObject.CompareTag("Enemy"))
+                {
+                    Destroy(collision.gameObject);
 
 
-		}
+                    losePanel.SetActive(true);
 
 
+                }
+                if (collision.gameObject.CompareTag("Collision"))
+                {
+                    Time.timeScale = 0f;
+
+                    losePanel.SetActive(true);
+                }
+
+
+            }
+            */
+
+        }
 	}
 }
